@@ -13,6 +13,7 @@ import com.esafirm.imagepicker.R;
 import com.esafirm.imagepicker.features.imageloader.ImageLoader;
 import com.esafirm.imagepicker.features.imageloader.ImageType;
 import com.esafirm.imagepicker.helper.ImagePickerUtils;
+import com.esafirm.imagepicker.listeners.OnCaptureClickedListenter;
 import com.esafirm.imagepicker.listeners.OnImageClickListener;
 import com.esafirm.imagepicker.listeners.OnImageSelectedListener;
 import com.esafirm.imagepicker.model.Image;
@@ -27,6 +28,9 @@ public class ImagePickerAdapter extends BaseListAdapter<ImagePickerAdapter.Image
 
     private OnImageClickListener itemClickListener;
     private OnImageSelectedListener imageSelectedListener;
+    private OnCaptureClickedListenter captureClickedListenter;
+
+    private static final int CAMERA_ID = -99999;
 
     public ImagePickerAdapter(Context context, ImageLoader imageLoader,
                               List<Image> selectedImages, OnImageClickListener itemClickListener) {
@@ -48,6 +52,13 @@ public class ImagePickerAdapter extends BaseListAdapter<ImagePickerAdapter.Image
     @Override
     public void onBindViewHolder(ImageViewHolder viewHolder, int position) {
 
+        if (position == 0){
+            viewHolder.itemView.setOnClickListener(view -> {
+                if (captureClickedListenter!=null)
+                    captureClickedListenter.onCaptureClicked();
+            });
+            return;
+        }
         final Image image = images.get(position);
         final boolean isSelected = isSelected(image);
 
@@ -110,6 +121,7 @@ public class ImagePickerAdapter extends BaseListAdapter<ImagePickerAdapter.Image
 
     public void setData(List<Image> images) {
         this.images.clear();
+        this.images.add(new Image(CAMERA_ID, "Camera",  String.valueOf(CAMERA_ID)));
         this.images.addAll(images);
     }
 
@@ -143,6 +155,10 @@ public class ImagePickerAdapter extends BaseListAdapter<ImagePickerAdapter.Image
 
     public void setImageSelectedListener(OnImageSelectedListener imageSelectedListener) {
         this.imageSelectedListener = imageSelectedListener;
+    }
+
+    public void setCaptureClickedListenter(OnCaptureClickedListenter captureClickedListenter){
+        this.captureClickedListenter = captureClickedListenter;
     }
 
     public Image getItem(int position) {

@@ -15,6 +15,7 @@ import com.esafirm.imagepicker.features.ReturnMode;
 import com.esafirm.imagepicker.features.imageloader.ImageLoader;
 import com.esafirm.imagepicker.helper.ConfigUtils;
 import com.esafirm.imagepicker.helper.ImagePickerUtils;
+import com.esafirm.imagepicker.listeners.OnCaptureClickedListenter;
 import com.esafirm.imagepicker.listeners.OnFolderClickListener;
 import com.esafirm.imagepicker.listeners.OnImageClickListener;
 import com.esafirm.imagepicker.listeners.OnImageSelectedListener;
@@ -130,6 +131,10 @@ public class RecyclerViewManager {
                 : String.format(context.getString(R.string.ef_selected_with_limit), imageSize, config.getLimit());
     }
 
+    public int getSelectedImageSize(){
+        return imageAdapter.getSelectedImages().size();
+    }
+
     public void setImageAdapter(List<Image> images) {
         imageAdapter.setData(images);
         setItemDecoration(imageColumns);
@@ -165,6 +170,10 @@ public class RecyclerViewManager {
     public void setImageSelectedListener(OnImageSelectedListener listener) {
         checkAdapterIsInitialized();
         imageAdapter.setImageSelectedListener(listener);
+    }
+
+    public void setCaptureClickedListener(OnCaptureClickedListenter captureClickedListener){
+        imageAdapter.setCaptureClickedListenter(captureClickedListener);
     }
 
     public boolean selectImage(boolean isSelected) {

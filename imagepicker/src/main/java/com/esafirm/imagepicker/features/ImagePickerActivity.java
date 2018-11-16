@@ -41,6 +41,7 @@ import com.esafirm.imagepicker.helper.ImagePickerPreferences;
 import com.esafirm.imagepicker.helper.IpLogger;
 import com.esafirm.imagepicker.helper.LocaleManager;
 import com.esafirm.imagepicker.helper.ViewUtils;
+import com.esafirm.imagepicker.listeners.OnCaptureClickedListenter;
 import com.esafirm.imagepicker.model.Folder;
 import com.esafirm.imagepicker.model.Image;
 import com.esafirm.imagepicker.view.SnackBarView;
@@ -177,6 +178,12 @@ public class ImagePickerActivity extends AppCompatActivity implements ImagePicke
                 onDone();
             }
         });
+        recyclerViewManager.setCaptureClickedListener(new OnCaptureClickedListenter() {
+            @Override
+            public void onCaptureClicked() {
+                captureImageWithPermission();
+            }
+        });
 
     }
 
@@ -225,6 +232,7 @@ public class ImagePickerActivity extends AppCompatActivity implements ImagePicke
     private void invalidateTitle() {
         supportInvalidateOptionsMenu();
         actionBar.setTitle(recyclerViewManager.getTitle());
+//         recyclerViewManager.getSelectedImageSize()
     }
 
     /**
@@ -238,17 +246,8 @@ public class ImagePickerActivity extends AppCompatActivity implements ImagePicke
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem menuCamera = menu.findItem(R.id.menu_camera);
-        if (menuCamera != null) {
-            ImagePickerConfig imagePickerConfig = getImagePickerConfig();
-            if (imagePickerConfig != null) {
-                menuCamera.setVisible(imagePickerConfig.isShowCamera());
-            }
-        }
-
         MenuItem menuDone = menu.findItem(R.id.menu_done);
         if (menuDone != null) {
-            menuDone.setTitle(ConfigUtils.getDoneButtonText(this, config));
             menuDone.setVisible(recyclerViewManager.isShowDoneButton());
         }
         return super.onPrepareOptionsMenu(menu);
@@ -267,10 +266,6 @@ public class ImagePickerActivity extends AppCompatActivity implements ImagePicke
         }
         if (id == R.id.menu_done) {
             onDone();
-            return true;
-        }
-        if (id == R.id.menu_camera) {
-            captureImageWithPermission();
             return true;
         }
         return super.onOptionsItemSelected(item);
