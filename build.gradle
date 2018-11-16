@@ -1,7 +1,7 @@
 buildscript {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0'
@@ -14,14 +14,14 @@ ext {
     sdk = [
             compileSdk: 28,
             targetSdk : 28,
-            minSdk    : 14
+            minSdk    : 21
     ]
 }
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
 }
 

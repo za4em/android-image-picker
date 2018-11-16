@@ -11,6 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/selected_photos"
+        android:background="#eaeaf8"
+        android:layout_below="@id/toolbar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/images_selected_text"
+            android:textSize="12sp"
+            android:fontFamily="@font/gotham_pro_med"
+            android:layout_gravity="center"
+            android:text="Выбрано 0 фото"/>
+
+    </FrameLayout>
+
     <TextView
         android:id="@+id/tv_empty_images"
         android:layout_width="wrap_content"
@@ -32,7 +50,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"/>
+        android:layout_below="@+id/selected_photos"/>
 
     <com.esafirm.imagepicker.view.SnackBarView
         android:id="@+id/ef_snackbar"

@@ -40,6 +40,7 @@ public class MainFragment extends Fragment {
                             .toolbarFolderTitle("Folder") // folder selection title
                             .toolbarImageTitle("Tap to select")
                             .toolbarDoneButtonText("DONE") // done button text
+                            .selectionImageText("Выбрано %s фото")
                             .start(0); // image selection title
                 });
 

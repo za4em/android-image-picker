@@ -67,6 +67,7 @@ public class ImagePickerActivity extends AppCompatActivity implements ImagePicke
     private TextView emptyTextView;
     private RecyclerView recyclerView;
     private SnackBarView snackBarView;
+    private TextView imagesSelectedText;
 
     private RecyclerViewManager recyclerViewManager;
 
@@ -144,8 +145,10 @@ public class ImagePickerActivity extends AppCompatActivity implements ImagePicke
         emptyTextView = findViewById(R.id.tv_empty_images);
         recyclerView = findViewById(R.id.recyclerView);
         snackBarView = findViewById(R.id.ef_snackbar);
+        imagesSelectedText = findViewById(R.id.images_selected_text);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitleTextAppearance(this, R.style.ef_ToolbarTextAppearance);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
 
@@ -232,7 +235,8 @@ public class ImagePickerActivity extends AppCompatActivity implements ImagePicke
     private void invalidateTitle() {
         supportInvalidateOptionsMenu();
         actionBar.setTitle(recyclerViewManager.getTitle());
-//         recyclerViewManager.getSelectedImageSize()
+        String selectionText = ConfigUtils.getSelectionText(this, config);
+        imagesSelectedText.setText(String.format(selectionText, recyclerViewManager.getSelectedImageSize()));
     }
 
     /**

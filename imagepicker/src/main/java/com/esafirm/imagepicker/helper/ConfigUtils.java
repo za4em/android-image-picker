@@ -57,4 +57,11 @@ public class ConfigUtils {
                 ? context.getString(R.string.ef_done)
                 : doneButtonText;
     }
+
+    public static String getSelectionText(Context context, ImagePickerConfig config){
+        final String selectionImageText = config.getSelectionImageText();
+        return ImagePickerUtils.isStringEmpty(selectionImageText)
+                ? context.getString(R.string.ef_selection_text)
+                : selectionImageText;
+    }
 }

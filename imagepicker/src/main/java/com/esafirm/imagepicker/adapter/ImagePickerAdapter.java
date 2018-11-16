@@ -53,6 +53,12 @@ public class ImagePickerAdapter extends BaseListAdapter<ImagePickerAdapter.Image
     public void onBindViewHolder(ImageViewHolder viewHolder, int position) {
 
         if (position == 0){
+            viewHolder.imageView.setScaleType(ImageView.ScaleType.CENTER);
+            viewHolder.imageView.setImageResource(R.drawable.ef_ic_camera_white);
+            viewHolder.container.setBackgroundResource(R.drawable.ef_image_placeholder);
+            viewHolder.container.setForeground(null);
+            viewHolder.alphaView.setAlpha(0f);
+            viewHolder.selected.setVisibility(View.GONE);
             viewHolder.itemView.setOnClickListener(view -> {
                 if (captureClickedListenter!=null)
                     captureClickedListenter.onCaptureClicked();
@@ -62,6 +68,7 @@ public class ImagePickerAdapter extends BaseListAdapter<ImagePickerAdapter.Image
         final Image image = images.get(position);
         final boolean isSelected = isSelected(image);
 
+        viewHolder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         getImageLoader().loadImage(
                 image.getPath(),
                 viewHolder.imageView,
@@ -83,9 +90,12 @@ public class ImagePickerAdapter extends BaseListAdapter<ImagePickerAdapter.Image
                 ? View.VISIBLE
                 : View.GONE);
 
-        viewHolder.alphaView.setAlpha(isSelected
-                ? 0.5f
-                : 0f);
+//        viewHolder.alphaView.setAlpha(isSelected
+//                ? 0.5f
+//                : 0f);
+        viewHolder.alphaView.setAlpha(0f);
+
+        viewHolder.selected.setVisibility(isSelected ? View.VISIBLE : View.GONE);
 
         viewHolder.itemView.setOnClickListener(v -> {
             boolean shouldSelect = itemClickListener.onImageClick(
@@ -99,9 +109,10 @@ public class ImagePickerAdapter extends BaseListAdapter<ImagePickerAdapter.Image
             }
         });
 
-        viewHolder.container.setForeground(isSelected
-                ? ContextCompat.getDrawable(getContext(), R.drawable.ef_ic_done_white)
-                : null);
+//        viewHolder.container.setForeground(isSelected
+//                ? ContextCompat.getDrawable(getContext(), R.drawable.ef_ic_done_white)
+//                : null);
+        viewHolder.container.setForeground(null);
     }
 
     private boolean isSelected(Image image) {
@@ -175,6 +186,7 @@ public class ImagePickerAdapter extends BaseListAdapter<ImagePickerAdapter.Image
         private View alphaView;
         private TextView fileTypeIndicator;
         private FrameLayout container;
+        private ImageView selected;
 
         ImageViewHolder(View itemView) {
             super(itemView);
@@ -182,6 +194,7 @@ public class ImagePickerAdapter extends BaseListAdapter<ImagePickerAdapter.Image
             container = (FrameLayout) itemView;
             imageView = itemView.findViewById(R.id.image_view);
             alphaView = itemView.findViewById(R.id.view_alpha);
+            selected = itemView.findViewById(R.id.image_view_selected);
             fileTypeIndicator = itemView.findViewById(R.id.ef_item_file_type_indicator);
         }
     }

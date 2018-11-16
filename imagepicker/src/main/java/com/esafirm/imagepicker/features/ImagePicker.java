@@ -137,6 +137,11 @@ public abstract class ImagePicker {
         return this;
     }
 
+    public ImagePicker selectionImageText(String text) {
+        config.setSelectionImageText(text);
+        return this;
+    }
+
     public ImagePicker origin(ArrayList<Image> images) {
         config.setSelectedImages(images);
         return this;

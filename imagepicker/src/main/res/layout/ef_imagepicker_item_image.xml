@@ -13,6 +13,15 @@
         android:contentDescription="@string/ef_content_desc_image"
         android:scaleType="centerCrop"/>
 
+    <ImageView
+        android:id="@+id/image_view_selected"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:src="@drawable/ef_selected_frame"
+        android:scaleType="fitXY"
+        />
+
     <View
         android:id="@+id/view_alpha"
         android:layout_width="match_parent"

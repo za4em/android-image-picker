@@ -24,5 +24,6 @@
 
     <!--Don\'t Translate-->
     <string name="ef_gif">GIF</string>
+    <string name="ef_selection_text">Выбрано %d фото</string>
 
 </resources>

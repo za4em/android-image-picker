@@ -91,10 +91,8 @@ public class MainActivity extends AppCompatActivity {
                         : ReturnMode.NONE) // set whether pick action or camera action should return immediate result or not. Only works in single mode for image picker
                 .folderMode(folderMode) // set folder mode (false by default)
                 .includeVideo(includeVideo) // include video (false by default)
-                .toolbarArrowColor(Color.RED) // set toolbar arrow up color
-                .toolbarFolderTitle("Folder") // folder selection title
-                .toolbarImageTitle("Tap to select") // image selection title
-                .toolbarDoneButtonText("DONE"); // done button text
+                .toolbarArrowColor(Color.WHITE) // set toolbar arrow up color
+                .toolbarImageTitle("Добавить фото"); // image selection title
 
         if (useCustomImageLoader) {
             imagePicker.imageLoader(new GrayscaleImageLoader());
