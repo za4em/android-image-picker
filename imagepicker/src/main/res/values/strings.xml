@@ -27,6 +27,6 @@
     <string name="ef_video" translatable="false">Video</string>
     <string name="ef_content_desc_folder" translatable="false">Folder</string>
     <string name="ef_content_desc_image" translatable="false">Image</string>
-    <string name="ef_selection_text">Выбрано %d фото</string>
+    <string name="ef_selection_text">Selected %s out of 8 photos</string>
 
 </resources>
